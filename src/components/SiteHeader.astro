@@ -1,62 +1,142 @@
-<header
-      class="fs-fixed fs-top-0 fs-left-0 fs-w-full fs-z-50 fs-bg-surface-container-lowest-90 fs-backdrop-blur-md fs-shadow--0_1px_8px_rgba-15-20-28-0-06"
-    >
-      <div
-        class="fs-h-20 fs-max-w-7xl fs-mx-auto fs-px-6 fs-lg--px-12 fs-flex fs-items-center fs-justify-between fs-gap-gutter"
-      >
-        <div class="fs-flex fs-items-center fs-gap-space-lg">
-          <a
-            class="fs-flex fs-items-center fs-gap-space-xs fs-group"
-            data-path="servicios" href="#servicios"
-            ><span class="fs-w-2 fs-h-2 fs-bg-secondary fs-inline-block"></span
-            ><span
-              class="fs-font-headline-md fs-text-headline-md fs-tracking-tight fs-text-primary fs-font-semibold"
-              >FIRMA<span
-                class="fs-font-body-md fs-text-body-md fs-uppercase fs-tracking--0-2em fs-font-normal fs-text-on-surface-variant fs-ml-2 fs-pl-2 fs-border-l fs-border-outline-variant"
-                >Strategic</span
-              ></span
-            ></a
-          >
-        </div>
-        <nav
-          class="fs-hidden fs-lg--flex fs-items-center fs-gap-8"
-        >
-          <a
-            aria-current="page"
-            class="fs-uppercase fs-transition-colors fs-py-2 fs-tracking-wider fs-text-primary fs-font-semibold fs-border-b-2 fs-border-primary"
-            data-path="servicios" href="#servicios"
-            >Servicios</a
-          ><a
-            class="fs-font-label-md fs-text-label-md fs-uppercase fs-text-on-surface-variant fs-hover--text-primary fs-transition-colors fs-py-2 fs-tracking-wider"
-            data-path="quienes-somos" href="#quienes-somos"
-            >Quiénes Somos</a
-          ><a
-            class="fs-font-label-md fs-text-label-md fs-uppercase fs-text-on-surface-variant fs-hover--text-primary fs-transition-colors fs-py-2 fs-tracking-wider"
-            data-path="acompanamiento" href="#acompanamiento"
-            >Acompañamiento</a
-          ><a
-            class="fs-font-label-md fs-text-label-md fs-uppercase fs-text-on-surface-variant fs-hover--text-primary fs-transition-colors fs-py-2 fs-tracking-wider"
-            data-path="metodologia" href="#metodologia"
-            >Metodología</a
-          ><a
-            class="fs-font-label-md fs-text-label-md fs-uppercase fs-text-on-surface-variant fs-hover--text-primary fs-transition-colors fs-py-2 fs-tracking-wider"
-            data-path="contacto" href="#contacto"
-            >Contacto</a
-          >
-        </nav>
-        <div class="fs-flex fs-items-center fs-gap-space-md">
-          <a
-            class="fs-hidden fs-sm--inline-flex fs-items-center fs-justify-center fs-bg-primary fs-text-on-primary fs-font-label-md fs-text-label-md fs-uppercase fs-px-space-lg fs-py-space-sm fs-hover--bg-on-surface-variant fs-hover--text-on-primary fs-transition-all fs-tracking-wider"
-            data-path="contacto" href="#contacto"
-            >Solicitar asesoramiento</a
-          >
-          <div
-            class="fs-w-8 fs-h-8 fs-rounded-full fs-bg-primary fs-flex fs-items-center fs-justify-center fs-shrink-0"
-          >
-            <span class="fs-material-symbols-outlined fs-text-on-primary fs-text--18px"
-              >person</span
-            >
-          </div>
-        </div>
-      </div>
-    </header>
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="site-header-brand-group">
+      <a class="site-brand" data-path="servicios" href="#hero">
+        <span class="site-brand-name">FIRMA<span class="site-brand-sub">Strategic</span></span>
+      </a>
+    </div>
+    <nav class="site-nav">
+      <a aria-current="page" class="site-nav-link is-current" data-path="servicios" href="#servicios">Servicios</a>
+      <a class="site-nav-link" data-path="quienes-somos" href="#quienes-somos">Quiénes Somos</a>
+      <a class="site-nav-link" data-path="acompanamiento" href="#acompanamiento">Acompañamiento</a>
+      <a class="site-nav-link" data-path="metodologia" href="#metodologia">Metodología</a>
+      <a class="site-nav-link" data-path="contacto" href="#contacto">Contacto</a>
+    </nav>
+    <div class="site-header-actions">
+      <a class="site-header-cta" data-path="contacto" href="#contacto">Solicitar asesoramiento</a>
+    </div>
+  </div>
+</header>
+
+<style>
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background-color: color-mix(in srgb, var(--color-surface-container-lowest) 90%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 8px rgba(15, 20, 28, 0.06);
+}
+
+.site-header-inner {
+  height: 5rem;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.site-header-brand-group,
+.site-header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.site-header-brand-group { gap: var(--space-space-lg); }
+.site-header-actions { gap: var(--space-space-md); }
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-space-xs);
+}
+
+
+.site-brand-name {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--color-primary);
+}
+
+.site-brand-sub {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 24px;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+  margin-left: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 1px solid var(--color-outline-variant);
+}
+
+.site-nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+.site-nav-link {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-on-surface-variant);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  transition: color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-nav-link:hover { color: var(--color-primary); }
+
+.site-nav-link.is-current {
+  color: var(--color-primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-primary);
+}
+
+.site-header-cta {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: var(--space-space-sm) var(--space-space-lg);
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header-cta:hover {
+  background-color: var(--color-on-surface-variant);
+  color: var(--color-on-primary);
+}
+
+
+
+@media (min-width: 640px) {
+  .site-header-cta { display: inline-flex; }
+}
+
+@media (min-width: 1024px) {
+  .site-header-inner { padding-left: 3rem; padding-right: 3rem; }
+  .site-nav { display: flex; }
+}
+</style>

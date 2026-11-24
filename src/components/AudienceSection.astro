@@ -1,225 +1,129 @@
-<section
-          class="fs-w-full fs-bg-surface-container fs-py-space-xl fs-lg--py-24"
-          id="acompanamiento"
-        >
-          <div class="fs-max-w-7xl fs-mx-auto fs-px-6 fs-lg--px-12">
-            <!-- Section Header -->
-            <div
-              class="fs-flex fs-flex-col fs-md--flex-row fs-md--items-end fs-justify-between fs-gap-space-md fs-mb-space-xl"
-            >
-              <div class="fs-space-y-space-xs">
-                <span
-                  class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-widest fs-text-secondary fs-block fs-font-semibold"
-                  >03 // SEGMENTACIÓN Y DIAGNÓSTICO</span
-                >
-                <h2
-                  class="fs-font-headline-lg fs-text-headline-lg fs-lg--text-display-lg fs-text-primary fs-font-semibold"
-                >
-                  ¿En qué etapa se encuentra tu proyecto?
-                </h2>
-              </div>
-              <p
-                class="fs-font-body-md fs-text-body-md fs-text-on-surface-variant fs-max-w-md"
-              >
-                Respuestas a la medida de tu volumen operativo, desde
-                profesionales independientes exportando talento hasta
-                corporaciones industriales en expansión.
-              </p>
-            </div>
-            <!-- Segment Cards (Asymmetric Cards) -->
-            <div class="fs-grid fs-grid-cols-1 fs-md--grid-cols-3 fs-gap-gutter-desktop">
-              <!-- Segment 1: Emprendedor / Profesional -->
-              <div
-                class="fs-bg-surface-container-lowest fs-p-space-lg fs-lg--p-space-xl fs-flex fs-flex-col fs-justify-between fs-shadow-sm"
-              >
-                <div class="fs-space-y-space-md">
-                  <div
-                    class="fs-inline-flex fs-items-center fs-gap-2 fs-px-2-5 fs-py-1 fs-bg-surface-container-low"
-                  >
-                    <span class="fs-w-1-5 fs-h-1-5 fs-bg-secondary"></span>
-                    <span
-                      class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-wider fs-text-on-surface-variant"
-                      >Perfil Profesional / Autónomo</span
-                    >
-                  </div>
-                  <h3 class="fs-font-headline-md fs-text-headline-md fs-text-primary">
-                    “Tengo un emprendimiento o perfil profesional y quiero
-                    crecer”
-                  </h3>
-                  <p
-                    class="fs-font-body-sm fs-text-body-sm fs-text-on-surface-variant fs-leading-relaxed"
-                  >
-                    Monetiza tus servicios al exterior sin perder margen en
-                    tipos de cambio desfavorables. Cobros limpios, cuentas
-                    bancarias personales o empresariales en moneda dura y
-                    constitución inicial ágil.
-                  </p>
-                  <div class="fs-space-y-space-xs fs-pt-space-xs">
-                    <span
-                      class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-wider fs-text-primary fs-block fs-font-semibold"
-                      >Soluciones clave para este perfil:</span
-                    >
-                    <ul
-                      class="fs-space-y-1 fs-text-on-surface-variant fs-font-body-sm fs-text-body-sm"
-                    >
-                      <li>
-                        • Cobro de servicios al exterior (Stripe, Deel, Wise).
-                      </li>
-                      <li>
-                        • Cuentas en dólares/euros y liquidación con
-                        divisas/USDT.
-                      </li>
-                      <li>• Apertura ágil de LLC unipersonal sin viajar.</li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="fs-pt-space-lg">
-                  <button
-                    class="fs-w-full fs-py-space-sm fs-px-space-md fs-bg-primary fs-text-on-primary fs-font-label-md fs-text-label-md fs-uppercase fs-tracking-wider fs-hover--bg-inverse-surface fs-transition-colors fs-flex fs-items-center fs-justify-center fs-gap-2"
-                    onclick="
-                      prefillContact(
-                        'Emprendedor / Profesional',
-                        'Soy profesional/emprendedor y necesito gestionar cobros al exterior y constituir mi estructura.',
-                      )
-                    "
-                  >
-                    <span>Elegir este perfil</span>
-                    <span class="fs-material-symbols-outlined fs-text--16px"
-                      >arrow_forward</span
-                    >
-                  </button>
-                </div>
-              </div>
-              <!-- Segment 2: Negocio / Comercio -->
-              <div
-                class="fs-bg-surface-container-lowest fs-p-space-lg fs-lg--p-space-xl fs-flex fs-flex-col fs-justify-between fs-shadow-sm"
-              >
-                <div class="fs-space-y-space-md">
-                  <div
-                    class="fs-inline-flex fs-items-center fs-gap-2 fs-px-2-5 fs-py-1 fs-bg-surface-container-low"
-                  >
-                    <span class="fs-w-1-5 fs-h-1-5 fs-bg-secondary"></span>
-                    <span
-                      class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-wider fs-text-on-surface-variant"
-                      >Comercio / Importador</span
-                    >
-                  </div>
-                  <h3 class="fs-font-headline-md fs-text-headline-md fs-text-primary">
-                    “Tengo un negocio o comercio y necesito soluciones
-                    operativas”
-                  </h3>
-                  <p
-                    class="fs-font-body-sm fs-text-body-sm fs-text-on-surface-variant fs-leading-relaxed"
-                  >
-                    Abastece tu inventario sin fricciones. Giros seguros a
-                    fábricas en China o EE.UU., courier puerta a puerta para
-                    muestras o carga, y desaduanamiento con previsibilidad de
-                    costos.
-                  </p>
-                  <div class="fs-space-y-space-xs fs-pt-space-xs">
-                    <span
-                      class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-wider fs-text-primary fs-block fs-font-semibold"
-                      >Soluciones clave para este perfil:</span
-                    >
-                    <ul
-                      class="fs-space-y-1 fs-text-on-surface-variant fs-font-body-sm fs-text-body-sm"
-                    >
-                      <li>
-                        • Pago internacional a proveedores sin demoras
-                        bancarias.
-                      </li>
-                      <li>
-                        • Logística exprés, auditoría en origen y seguimiento
-                        aduanero.
-                      </li>
-                      <li>
-                        • Optimización de costos de importación de mercadería.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="fs-pt-space-lg">
-                  <button
-                    class="fs-w-full fs-py-space-sm fs-px-space-md fs-bg-primary fs-text-on-primary fs-font-label-md fs-text-label-md fs-uppercase fs-tracking-wider fs-hover--bg-inverse-surface fs-transition-colors fs-flex fs-items-center fs-justify-center fs-gap-2"
-                    onclick="
-                      prefillContact(
-                        'Comerciante / Dueño de negocio',
-                        'Tengo un negocio comercial y necesito optimizar importaciones, courier y pagos a proveedores.',
-                      )
-                    "
-                  >
-                    <span>Elegir este perfil</span>
-                    <span class="fs-material-symbols-outlined fs-text--16px"
-                      >arrow_forward</span
-                    >
-                  </button>
-                </div>
-              </div>
-              <!-- Segment 3: Empresa / Corporativo -->
-              <div
-                class="fs-bg-surface-container-lowest fs-p-space-lg fs-lg--p-space-xl fs-flex fs-flex-col fs-justify-between fs-shadow-sm"
-              >
-                <div class="fs-space-y-space-md">
-                  <div
-                    class="fs-inline-flex fs-items-center fs-gap-2 fs-px-2-5 fs-py-1 fs-bg-surface-container-low"
-                  >
-                    <span class="fs-w-1-5 fs-h-1-5 fs-bg-secondary"></span>
-                    <span
-                      class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-wider fs-text-on-surface-variant"
-                      >Empresa Consolidada</span
-                    >
-                  </div>
-                  <h3 class="fs-font-headline-md fs-text-headline-md fs-text-primary">
-                    “Tengo una empresa y busco expandirme internacionalmente”
-                  </h3>
-                  <p
-                    class="fs-font-body-sm fs-text-body-sm fs-text-on-surface-variant fs-leading-relaxed"
-                  >
-                    Estructura tu grupo empresarial para licitar, abrir
-                    sucursales, fondear operaciones multijurisdiccionales y
-                    blindar el patrimonio de los socios con directrices fiscales
-                    transparentes.
-                  </p>
-                  <div class="fs-space-y-space-xs fs-pt-space-xs">
-                    <span
-                      class="fs-font-label-sm fs-text-label-sm fs-uppercase fs-tracking-wider fs-text-primary fs-block fs-font-semibold"
-                      >Soluciones clave para este perfil:</span
-                    >
-                    <ul
-                      class="fs-space-y-1 fs-text-on-surface-variant fs-font-body-sm fs-text-body-sm"
-                    >
-                      <li>
-                        • Arquitectura holding internacional y acuerdos de
-                        accionistas.
-                      </li>
-                      <li>
-                        • Gestión de tesorería corporativa multimoneda de alto
-                        volumen.
-                      </li>
-                      <li>
-                        • Blindaje patrimonial frente a contingencias
-                        jurisdiccionales.
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="fs-pt-space-lg">
-                  <button
-                    class="fs-w-full fs-py-space-sm fs-px-space-md fs-bg-primary fs-text-on-primary fs-font-label-md fs-text-label-md fs-uppercase fs-tracking-wider fs-hover--bg-inverse-surface fs-transition-colors fs-flex fs-items-center fs-justify-center fs-gap-2"
-                    onclick="
-                      prefillContact(
-                        'Empresario / Empresa',
-                        'Somos una empresa en expansión buscando arquitectura corporativa transfronteriza y tesorería.',
-                      )
-                    "
-                  >
-                    <span>Elegir este perfil</span>
-                    <span class="fs-material-symbols-outlined fs-text--16px"
-                      >arrow_forward</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
+<section class="audience-section" id="acompanamiento">
+  <div class="audience-container">
+    <div class="audience-header">
+      <div class="audience-header-copy">
+        <span class="audience-section-tag">03 // SEGMENTACIÓN Y DIAGNÓSTICO</span>
+        <h2 class="audience-title">¿En qué etapa se encuentra tu proyecto?</h2>
+      </div>
+      <p class="audience-header-text">
+        Respuestas a la medida de tu volumen operativo, desde profesionales independientes exportando talento hasta corporaciones industriales en expansión.
+      </p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="audience-card-body">
+          <div class="audience-segment-badge">
+            <span class="audience-segment-dot"></span>
+            <span class="audience-segment-label">Perfil Profesional / Autónomo</span>
           </div>
-        </section>
+          <h3 class="audience-card-title">“Tengo un emprendimiento o perfil profesional y quiero crecer”</h3>
+          <p class="audience-card-text">Monetiza tus servicios al exterior sin perder margen en tipos de cambio desfavorables. Cobros limpios, cuentas bancarias personales o empresariales en moneda dura y constitución inicial ágil.</p>
+          <div class="audience-card-features">
+            <span class="audience-features-title">Soluciones clave para este perfil:</span>
+            <ul class="audience-feature-list">
+              <li>• Cobro de servicios al exterior (Stripe, Deel, Wise).</li>
+              <li>• Cuentas en dólares/euros y liquidación con divisas/USDT.</li>
+              <li>• Apertura ágil de LLC unipersonal sin viajar.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="audience-card-footer">
+          <button class="audience-cta" onclick="prefillContact('Emprendedor / Profesional', 'Soy profesional/emprendedor y necesito gestionar cobros al exterior y constituir mi estructura.')">
+            <span>Elegir este perfil</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-body">
+          <div class="audience-segment-badge">
+            <span class="audience-segment-dot"></span>
+            <span class="audience-segment-label">Comercio / Importador</span>
+          </div>
+          <h3 class="audience-card-title">“Tengo un negocio o comercio y necesito soluciones operativas”</h3>
+          <p class="audience-card-text">Abastece tu inventario sin fricciones. Giros seguros a fábricas en China o EE.UU., courier puerta a puerta para muestras o carga, y desaduanamiento con previsibilidad de costos.</p>
+          <div class="audience-card-features">
+            <span class="audience-features-title">Soluciones clave para este perfil:</span>
+            <ul class="audience-feature-list">
+              <li>• Pago internacional a proveedores sin demoras bancarias.</li>
+              <li>• Logística exprés, auditoría en origen y seguimiento aduanero.</li>
+              <li>• Optimización de costos de importación de mercadería.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="audience-card-footer">
+          <button class="audience-cta" onclick="prefillContact('Comerciante / Dueño de negocio', 'Tengo un negocio comercial y necesito optimizar importaciones, courier y pagos a proveedores.')">
+            <span>Elegir este perfil</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+      <div class="audience-card">
+        <div class="audience-card-body">
+          <div class="audience-segment-badge">
+            <span class="audience-segment-dot"></span>
+            <span class="audience-segment-label">Empresa Consolidada</span>
+          </div>
+          <h3 class="audience-card-title">“Tengo una empresa y busco expandirme internacionalmente”</h3>
+          <p class="audience-card-text">Estructura tu grupo empresarial para licitar, abrir sucursales, fondear operaciones multijurisdiccionales y blindar el patrimonio de los socios con directrices fiscales transparentes.</p>
+          <div class="audience-card-features">
+            <span class="audience-features-title">Soluciones clave para este perfil:</span>
+            <ul class="audience-feature-list">
+              <li>• Arquitectura holding internacional y acuerdos de accionistas.</li>
+              <li>• Gestión de tesorería corporativa multimoneda de alto volumen.</li>
+              <li>• Blindaje patrimonial frente a contingencias jurisdiccionales.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="audience-card-footer">
+          <button class="audience-cta" onclick="prefillContact('Empresario / Empresa', 'Somos una empresa en expansión buscando arquitectura corporativa transfronteriza y tesorería.')">
+            <span>Elegir este perfil</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.audience-section { width: 100%; background-color: var(--color-surface-container); padding-top: var(--space-space-xl); padding-bottom: var(--space-space-xl); }
+.audience-header { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-space-md); margin-bottom: var(--space-space-xl); }
+.audience-header-copy > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-xs); }
+.audience-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2.5rem; }
+.audience-card {
+  background-color: var(--color-surface-container-lowest); padding: var(--space-space-lg); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);
+}
+.audience-card-body > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-md); }
+.audience-segment-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.625rem; background-color: var(--color-surface-container-low); }
+.audience-segment-dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  background-color: var(--color-secondary);
+}
+.audience-segment-label { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-on-surface-variant); }
+.audience-card-title { font-family: var(--font-display); font-size: 24px; line-height: 32px; font-weight: 600; color: var(--color-primary); }
+.audience-card-text { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; color: var(--color-on-surface-variant); line-height: 1.625; }
+.audience-card-features { padding-top: var(--space-space-xs); }
+.audience-card-features > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-xs); }
+.audience-features-title { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-primary); display: block; }
+.audience-feature-list { color: var(--color-on-surface-variant); font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; }
+.audience-feature-list > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
+.audience-card-footer { padding-top: var(--space-space-lg); }
+.audience-cta {
+  width: 100%; padding: var(--space-space-sm) var(--space-space-md); background-color: var(--color-primary); color: var(--color-on-primary);
+  font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+  transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.audience-cta:hover { background-color: var(--color-inverse-surface); }
+.audience-cta .material-symbols-outlined { font-size: 16px; }
+
+@media (min-width: 768px) {
+  .audience-header { flex-direction: row; align-items: flex-end; }
+  .audience-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .audience-section { padding-top: 6rem; padding-bottom: 6rem; }
+  .audience-card { padding: var(--space-space-xl); }
+}
+</style>

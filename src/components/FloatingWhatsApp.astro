@@ -1,29 +1,40 @@
-<aside class="fs-fixed fs-bottom-6 fs-right-6 fs-z-50 fs-flex fs-items-center fs-group">
-          <a
-            class="fs-flex fs-items-center fs-bg-primary fs-text-on-primary fs-pl-4 fs-pr-3 fs-py-3 fs-shadow-2xl fs-hover--bg-inverse-surface fs-transition-all"
-            href="https://wa.me/5491100000000?text=Hola,%20quiero%20consultar%20sobre%20los%20servicios%20de%20Firma%20Strategic..."
-            id="floating-wa-btn"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <div class="fs-flex fs-flex-col fs-text-left fs-mr-3">
-              <span
-                class="fs-font-label-sm fs-text-label-sm fs-text-secondary-container fs-font-mono fs-tracking-wider fs-flex fs-items-center fs-gap-1-5"
-              >
-                <span
-                  class="fs-w-2 fs-h-2 fs-rounded-full fs-bg-secondary fs-inline-block fs-animate-pulse"
-                ></span>
-                EN LÍNEA
-              </span>
-              <span
-                class="fs-font-body-sm fs-text-body-sm fs-font-semibold fs-text-on-primary fs-tracking-tight"
-                >Asesoría Inmediata</span
-              >
-            </div>
-            <div
-              class="fs-w-9 fs-h-9 fs-rounded-full fs-bg-secondary fs-flex fs-items-center fs-justify-center fs-text-on-secondary"
-            >
-              <span class="fs-material-symbols-outlined fs-text--20px">chat</span>
-            </div>
-          </a>
-        </aside>
+<aside class="floating-whatsapp">
+  <a
+    class="floating-whatsapp-link"
+    href="https://wa.me/5491100000000?text=Hola,%20quiero%20consultar%20sobre%20los%20servicios%20de%20Firma%20Strategic..."
+    id="floating-wa-btn"
+    rel="noopener noreferrer"
+    target="_blank"
+  >
+    <div class="floating-whatsapp-copy">
+      <span class="floating-whatsapp-status">
+        <span class="floating-whatsapp-dot"></span>
+        EN LÍNEA
+      </span>
+      <span class="floating-whatsapp-label">Asesoría Inmediata</span>
+    </div>
+    <div class="floating-whatsapp-icon">
+      <span class="material-symbols-outlined">chat</span>
+    </div>
+  </a>
+</aside>
+
+<style>
+.floating-whatsapp { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; display: flex; align-items: center; }
+.floating-whatsapp-link {
+  display: flex; align-items: center; background-color: var(--color-primary); color: var(--color-on-primary);
+  padding-left: 1rem; padding-right: 0.75rem; padding-top: 0.75rem; padding-bottom: 0.75rem;
+  box-shadow: var(--shadow-2xl); transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.floating-whatsapp-link:hover { background-color: var(--color-inverse-surface); }
+.floating-whatsapp-copy { display: flex; flex-direction: column; text-align: left; margin-right: 0.75rem; }
+.floating-whatsapp-status {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em;
+  color: var(--color-secondary-container); display: flex; align-items: center; gap: 0.375rem;
+}
+.floating-whatsapp-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background-color: var(--color-secondary); display: inline-block; animation: floating-whatsapp-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+.floating-whatsapp-label { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 600; color: var(--color-on-primary); letter-spacing: -0.025em; }
+.floating-whatsapp-icon { width: 2.25rem; height: 2.25rem; border-radius: 9999px; background-color: var(--color-secondary); display: flex; align-items: center; justify-content: center; color: var(--color-on-secondary); }
+.floating-whatsapp-icon .material-symbols-outlined { font-size: 20px; }
+@keyframes floating-whatsapp-pulse { 50% { opacity: .5; } }
+</style>
