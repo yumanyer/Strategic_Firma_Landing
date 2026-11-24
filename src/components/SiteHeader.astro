@@ -79,6 +79,7 @@
   if (navItems.length) {
     let observer: IntersectionObserver | null = null;
     let activeItem: NavItem | null = null;
+    let lockItem: NavItem | null = null; // NEW: enlace fijado mientras dura el desplazamiento animado
     let headerHeight = 0;
     let band = 0;
     let resizeFrame = 0;
@@ -95,6 +96,8 @@
     };
 
     const chooseActive = () => {
+      if (lockItem) return; // CHANGED: el scroll spy no compite con el desplazamiento animado
+
       let topmost: NavItem | null = null;
       let topmostPosition = -Infinity;
 
@@ -150,7 +153,125 @@
       });
     }, { passive: true });
 
+    // ---------- NEW: desplazamiento suave hacia las secciones ----------
+    const SCROLL_MIN_MS = 600;
+    const SCROLL_MAX_MS = 900;
+    const SCROLL_KEYS = new Set(["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "]);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    let scrollFrame = 0;
+    let holdY = 0;
+
+    const easeInOutCubic = (t: number) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const maxScroll = () =>
+      Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+
+    // Posición de scroll en la que la sección queda justo debajo del header fijo (sin acotar)
+    const rawTargetY = (section: HTMLElement) => {
+      const currentHeader = header ? header.getBoundingClientRect().height : 0;
+      return Math.round(section.getBoundingClientRect().top + window.scrollY - currentHeader + 1);
+    };
+    const targetY = (section: HTMLElement) => Math.min(Math.max(0, rawTargetY(section)), maxScroll());
+
+    const jumpTo = (y: number) => window.scrollTo({ top: y, behavior: "instant" });
+
+    const interrupt = () => {
+      if (!scrollFrame) return;
+      cancelAnimationFrame(scrollFrame);
+      scrollFrame = 0;
+      lockItem = null;
+      chooseActive(); // prevalece la posición real del usuario
+    };
+
+    const scrollToSection = (item: NavItem | null, section: HTMLElement) => {
+      cancelAnimationFrame(scrollFrame);
+      scrollFrame = 0;
+
+      lockItem = item;
+      if (item) setActive(item);
+
+      const finish = () => {
+        scrollFrame = 0;
+        // Sección final de la página que no llega a subir hasta el header: se mantiene
+        // activa hasta que el usuario vuelva a mover el scroll.
+        if (item && rawTargetY(section) > maxScroll() + 2) {
+          holdY = window.scrollY;
+          return;
+        }
+        lockItem = null;
+        chooseActive();
+      };
+
+      const startY = window.scrollY;
+      const distance = Math.abs(targetY(section) - startY);
+
+      if (reducedMotion.matches || distance < 2) {
+        jumpTo(targetY(section));
+        finish();
+        return;
+      }
+
+      const duration = Math.min(SCROLL_MAX_MS, Math.max(SCROLL_MIN_MS, distance * 0.5));
+      const startTime = performance.now();
+      let lastY = startY;
+
+      const step = (now: number) => {
+        // Si la posición no es la que dejamos, el usuario movió el scroll (barra, teclado, etc.)
+        if (Math.abs(window.scrollY - lastY) > 3) {
+          interrupt();
+          return;
+        }
+        const t = Math.min(1, Math.max(0, (now - startTime) / duration));
+        // El destino se recalcula en cada frame: absorbe cambios de layout durante la animación
+        jumpTo(Math.round(startY + (targetY(section) - startY) * easeInOutCubic(t)));
+        lastY = window.scrollY;
+        if (t < 1) scrollFrame = requestAnimationFrame(step);
+        else finish();
+      };
+      scrollFrame = requestAnimationFrame(step);
+    };
+
+    header?.addEventListener("click", (event) => {
+      if (event.defaultPrevented || event.button !== 0) return;
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      const anchor = target.closest<HTMLAnchorElement>("a[href^='#']");
+      if (!anchor) return;
+
+      const hash = anchor.getAttribute("href") ?? "";
+      const section = hash.length > 1 ? document.getElementById(hash.slice(1)) : null;
+      if (!section) return;
+
+      event.preventDefault();
+      const item = navItems.find((candidate) => candidate.section === section) ?? null;
+      if (location.hash !== hash) history.pushState(null, "", hash);
+
+      // El listener de <nav> ya cerró el menú mobile (burbujea antes que éste); el panel es
+      // absolute, así que no cambia el layout. Arrancamos en el siguiente frame.
+      requestAnimationFrame(() => scrollToSection(item, section));
+    });
+
+    // Interrupciones manuales: rueda, toque y teclas de scroll cancelan la animación
+    window.addEventListener("wheel", interrupt, { passive: true });
+    window.addEventListener("touchstart", interrupt, { passive: true });
+    window.addEventListener("keydown", (event) => {
+      if (SCROLL_KEYS.has(event.key)) interrupt();
+    });
+
+    // Libera el enlace "retenido" cuando el usuario se mueve de verdad
+    window.addEventListener("scroll", () => {
+      if (lockItem && !scrollFrame && Math.abs(window.scrollY - holdY) > 4) {
+        lockItem = null;
+        chooseActive();
+      }
+    }, { passive: true });
+
     window.addEventListener("pagehide", () => {
+      cancelAnimationFrame(scrollFrame);
       if (observer) observer.disconnect();
     }, { once: true });
   }
@@ -361,5 +482,12 @@
 @media (prefers-reduced-motion: reduce) {
   .site-nav-link,
   .site-nav-link::after { transition: none; }
+}
+:global(html) { scroll-padding-top: 4rem; }
+
+@media (min-width: 640px) {
+  .site-header-inner { min-height: 5rem; }
+  .site-header-cta { display: inline-flex; }
+  :global(html) { scroll-padding-top: 5rem; }
 }
 </style>
