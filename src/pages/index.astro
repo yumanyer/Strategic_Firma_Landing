@@ -1,0 +1,28 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import HeroSection from "../components/HeroSection.astro";
+import AboutSection from "../components/AboutSection.astro";
+import ServicesSection from "../components/ServicesSection.astro";
+import AudienceSection from "../components/AudienceSection.astro";
+import MethodologySection from "../components/MethodologySection.astro";
+import ContactSection from "../components/ContactSection.astro";
+import FloatingWhatsApp from "../components/FloatingWhatsApp.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+---
+
+<SiteLayout title="Firma Strategic — Consultoría Estratégica Internacional">
+  <SiteHeader />
+  <main class="site-main">
+    <div class="main-sections">
+      <HeroSection />
+      <AboutSection />
+      <ServicesSection />
+      <AudienceSection />
+      <MethodologySection />
+      <ContactSection />
+    </div>
+  </main>
+  <FloatingWhatsApp />
+  <SiteFooter />
+</SiteLayout>
