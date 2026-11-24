@@ -67,27 +67,29 @@
 </section>
 
 <style>
-.methodology-section { width: 100%; background-color: var(--color-surface); padding-top: var(--space-space-xl); padding-bottom: var(--space-space-xl); }
-.methodology-header { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-space-md); margin-bottom: var(--space-space-xl); }
+.methodology-section { width: 100%; background-color: var(--color-surface); padding-top: clamp(2.5rem, 6vw, 3rem); padding-bottom: clamp(2.5rem, 6vw, 3rem); }
+.methodology-header { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-space-md); margin-bottom: clamp(1.5rem, 5vw, 3rem); }
 .methodology-header-copy > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-xs); }
-.methodology-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2.5rem; }
+.methodology-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: clamp(1rem, 4vw, 2.5rem); }
 .methodology-step {
-  background-color: var(--color-surface-container-lowest); padding: var(--space-space-lg); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); position: relative;
+  background-color: var(--color-surface-container-lowest); padding: clamp(1rem, 4vw, 1.5rem); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm); position: relative;
 }
 .methodology-step-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--space-space-md); }
 .methodology-step-number { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 44px; line-height: 52px; font-weight: 600; letter-spacing: -0.02em; color: var(--color-secondary); }
 .methodology-step-header .material-symbols-outlined { color: var(--color-on-surface-variant); font-size: 24px; }
-.methodology-step-title { font-family: var(--font-sans); font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0.01em; color: var(--color-primary); margin-bottom: var(--space-space-xs); }
+.methodology-step-title { font-family: var(--font-sans); font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0.01em; overflow-wrap: break-word; color: var(--color-primary); margin-bottom: var(--space-space-xs); }
 .methodology-step-text { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; color: var(--color-on-surface-variant); line-height: 1.625; }
 .methodology-step-footer { margin-top: var(--space-space-lg); padding-top: var(--space-space-sm); }
 .methodology-deliverable { color: var(--color-on-surface-variant); display: block; letter-spacing: 0.05em; }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .methodology-header { flex-direction: row; align-items: flex-end; }
   .methodology-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1024px) {
   .methodology-section { padding-top: 6rem; padding-bottom: 6rem; }
+}
+@media (min-width: 1200px) {
   .methodology-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 </style>

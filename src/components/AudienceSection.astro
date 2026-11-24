@@ -87,12 +87,12 @@
 </section>
 
 <style>
-.audience-section { width: 100%; background-color: var(--color-surface-container); padding-top: var(--space-space-xl); padding-bottom: var(--space-space-xl); }
-.audience-header { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-space-md); margin-bottom: var(--space-space-xl); }
+.audience-section { width: 100%; background-color: var(--color-surface-container); padding-top: clamp(2.5rem, 6vw, 3rem); padding-bottom: clamp(2.5rem, 6vw, 3rem); }
+.audience-header { display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-space-md); margin-bottom: clamp(1.5rem, 5vw, 3rem); }
 .audience-header-copy > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-xs); }
-.audience-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2.5rem; }
+.audience-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: clamp(1rem, 4vw, 2.5rem); }
 .audience-card {
-  background-color: var(--color-surface-container-lowest); padding: var(--space-space-lg); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);
+  background-color: var(--color-surface-container-lowest); padding: clamp(1rem, 4vw, 1.5rem); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-sm);
 }
 .audience-card-body > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-md); }
 .audience-segment-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0.625rem; background-color: var(--color-surface-container-low); }
@@ -102,7 +102,7 @@
   background-color: var(--color-secondary);
 }
 .audience-segment-label { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-on-surface-variant); }
-.audience-card-title { font-family: var(--font-display); font-size: 24px; line-height: 32px; font-weight: 600; color: var(--color-primary); }
+.audience-card-title { font-family: var(--font-display); font-size: clamp(1.25rem, 3.4vw, 1.5rem); line-height: 32px; font-weight: 600; overflow-wrap: break-word; color: var(--color-primary); }
 .audience-card-text { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; color: var(--color-on-surface-variant); line-height: 1.625; }
 .audience-card-features { padding-top: var(--space-space-xs); }
 .audience-card-features > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-xs); }
@@ -111,19 +111,22 @@
 .audience-feature-list > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
 .audience-card-footer { padding-top: var(--space-space-lg); }
 .audience-cta {
-  width: 100%; padding: var(--space-space-sm) var(--space-space-md); background-color: var(--color-primary); color: var(--color-on-primary);
+  width: 100%; min-height: 44px; padding: var(--space-space-sm) var(--space-space-md); background-color: var(--color-primary); color: var(--color-on-primary);
   font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
   transition: background-color 150ms cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; gap: 0.5rem;
 }
 .audience-cta:hover { background-color: var(--color-inverse-surface); }
 .audience-cta .material-symbols-outlined { font-size: 16px; }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .audience-header { flex-direction: row; align-items: flex-end; }
-  .audience-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .audience-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 1024px) {
   .audience-section { padding-top: 6rem; padding-bottom: 6rem; }
-  .audience-card { padding: var(--space-space-xl); }
+  .audience-card { padding: clamp(1.5rem, 3vw, 3rem); }
+}
+@media (min-width: 1200px) {
+  .audience-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 </style>

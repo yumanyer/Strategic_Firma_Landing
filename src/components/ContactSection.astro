@@ -121,26 +121,27 @@
 </section>
 
 <style>
-.contact-section { width: 100%; background-color: var(--color-surface-container-low); padding-top: var(--space-space-xl); padding-bottom: var(--space-space-xl); }
-.contact-header { max-width: 48rem; margin-bottom: var(--space-space-xl); }
+.contact-section { width: 100%; background-color: var(--color-surface-container-low); padding-top: clamp(2.5rem, 6vw, 3rem); padding-bottom: clamp(2.5rem, 6vw, 3rem); }
+.contact-header { max-width: 48rem; margin-bottom: clamp(1.5rem, 5vw, 3rem); }
 .contact-title { margin-top: var(--space-space-xs); }
 .contact-header-text { margin-top: var(--space-space-xs); }
-.contact-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: 2.5rem; }
-.contact-panel { background-color: var(--color-primary); color: var(--color-on-primary); padding: var(--space-space-lg); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-xl); }
+.contact-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: clamp(1rem, 4vw, 2.5rem); }
+.contact-panel { background-color: var(--color-primary); color: var(--color-on-primary); padding: clamp(1rem, 4vw, 1.5rem); display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow-xl); }
 .contact-panel-body > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-md); }
 .contact-panel-eyebrow { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-secondary-fixed); display: block; }
-.contact-panel-title { font-family: var(--font-display); font-size: 24px; line-height: 32px; font-weight: 600; margin-top: 0.25rem; }
+.contact-panel-title { font-family: var(--font-display); font-size: clamp(1.25rem, 3.4vw, 1.5rem); line-height: 32px; font-weight: 600; overflow-wrap: break-word; margin-top: 0.25rem; }
 .contact-panel-text { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; color: var(--color-surface-container-highest); line-height: 1.625; }
 .contact-channels { padding-top: var(--space-space-xs); }
 .contact-channels > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-md); }
 .contact-channel-link, .contact-channel-item {
   display: flex; align-items: center; gap: var(--space-space-sm); padding: var(--space-space-md); background-color: var(--color-inverse-surface);
 }
+.contact-channel-link > div, .contact-channel-item > div { min-width: 0; }
 .contact-channel-link { transition: all 150ms cubic-bezier(0.4,0,0.2,1); }
 .contact-channel-link:hover { background-color: var(--color-surface-tint); }
 .contact-channel-link .material-symbols-outlined, .contact-channel-item .material-symbols-outlined { color: var(--color-secondary-fixed); font-size: 24px; }
 .contact-channel-label { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-surface-container-highest); display: block; }
-.contact-channel-value { font-family: var(--font-sans); font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0.01em; color: var(--color-on-primary); }
+.contact-channel-value { font-family: var(--font-sans); font-size: clamp(1rem, 2.4vw, 1.125rem); line-height: 26px; font-weight: 600; letter-spacing: 0.01em; overflow-wrap: anywhere; color: var(--color-on-primary); }
 .contact-channel-arrow { margin-left: auto; color: var(--color-on-primary); transition: transform 150ms cubic-bezier(0.4,0,0.2,1); }
 .contact-channel-link:hover .contact-channel-arrow { transform: translateX(0.25rem); }
 .contact-guarantees { padding-top: var(--space-space-md); }
@@ -149,23 +150,23 @@
 .contact-guarantee .material-symbols-outlined { font-size: 18px; color: var(--color-secondary-fixed); }
 .contact-guarantee-text { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; }
 .contact-panel-footer { padding-top: var(--space-space-lg); color: var(--color-surface-container-highest); font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-.contact-form-panel { background-color: var(--color-surface-container-lowest); padding: var(--space-space-lg); box-shadow: var(--shadow-xl); }
+.contact-form-panel { background-color: var(--color-surface-container-lowest); padding: clamp(1rem, 4vw, 1.5rem); box-shadow: var(--shadow-xl); }
 .contact-form > :not([hidden]) ~ :not([hidden]) { margin-top: var(--space-space-md); }
 .contact-form-grid { display: grid; grid-template-columns: repeat(1, minmax(0, 1fr)); gap: var(--space-space-md); }
-.contact-label { font-family: var(--font-sans); font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-on-surface-variant); display: block; margin-bottom: 0.25rem; }
+.contact-label { font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--color-on-surface-variant); display: block; margin-bottom: 0.25rem; }
 .contact-input, .contact-select, .contact-textarea {
-  width: 100%; padding: 0.75rem; background-color: var(--color-surface-container-lowest); color: var(--color-on-surface);
-  font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; box-shadow: var(--shadow-sm);
+  width: 100%; min-height: 44px; padding: 0.75rem; background-color: var(--color-surface-container-lowest); color: var(--color-on-surface);
+  font-family: var(--font-sans); font-size: 16px; line-height: 20px; font-weight: 400; box-shadow: var(--shadow-sm);
 }
 .contact-input:focus, .contact-select:focus, .contact-textarea:focus { outline: 2px solid transparent; outline-offset: 2px; box-shadow: 0 0 0 1px var(--color-primary); }
 .contact-textarea { resize: none; }
-.contact-nda { display: flex; align-items: center; gap: 0.5rem; padding-top: var(--space-space-xs); }
-.contact-checkbox { width: 1rem; height: 1rem; color: var(--color-primary); border-radius: 0; }
+.contact-nda { display: flex; align-items: center; min-height: 44px; gap: 0.5rem; padding-top: var(--space-space-xs); }
+.contact-checkbox { width: 1.5rem; height: 1.5rem; flex-shrink: 0; accent-color: var(--color-secondary); color: var(--color-primary); border-radius: 0; }
 .contact-checkbox:focus { box-shadow: 0 0 0 0 transparent; }
 .contact-nda-label { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; color: var(--color-on-surface-variant); }
 .contact-submit-wrap { padding-top: var(--space-space-sm); }
 .contact-submit {
-  width: 100%; padding: 1rem; background-color: var(--color-primary); color: var(--color-on-primary);
+  width: 100%; min-height: 48px; padding: 1rem; background-color: var(--color-primary); color: var(--color-on-primary);
   font-family: var(--font-sans); font-size: 12px; line-height: 16px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
   transition: all 150ms cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: var(--shadow-md);
 }
@@ -181,7 +182,7 @@
 @media (min-width: 1024px) {
   .contact-section { padding-top: 6rem; padding-bottom: 6rem; }
   .contact-grid { grid-template-columns: repeat(12, minmax(0, 1fr)); }
-  .contact-panel { grid-column: span 5 / span 5; padding: var(--space-space-xl); }
-  .contact-form-panel { grid-column: span 7 / span 7; padding: var(--space-space-xl); }
+  .contact-panel { grid-column: span 5 / span 5; padding: clamp(1.5rem, 3vw, 3rem); }
+  .contact-form-panel { grid-column: span 7 / span 7; padding: clamp(1.5rem, 3vw, 3rem); }
 }
 </style>

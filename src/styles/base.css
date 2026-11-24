@@ -73,7 +73,6 @@ svg,
 video,
 canvas {
     display: block;
-    vertical-align: middle
 }
 
 img {
@@ -84,6 +83,15 @@ img {
 a {
     color: inherit;
     text-decoration: inherit
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px
 }
 
 main>:first-child {
@@ -121,6 +129,7 @@ main>:last-child {
     word-wrap: normal;
     direction: ltr;
     -webkit-font-feature-settings: "liga";
+    font-feature-settings: "liga";
     -webkit-font-smoothing: antialiased;
 }
 
@@ -147,8 +156,8 @@ main>:last-child {
     max-width: 80rem;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: clamp(1rem, 4vw, 1.5rem);
+    padding-right: clamp(1rem, 4vw, 1.5rem);
 }
 
 .about-section-tag,
@@ -187,6 +196,7 @@ main>:last-child {
     line-height: 40px;
     font-weight: 600;
     letter-spacing: -0.01em;
+    overflow-wrap: break-word;
     color: var(--color-primary);
 }
 
@@ -202,6 +212,13 @@ main>:last-child {
     color: var(--color-on-surface-variant);
     max-width: 28rem;
     line-height: 1.625;
+}
+
+@media (max-width: 639px) {
+    .site-main {
+        padding-top: 4rem;
+        min-height: calc(100vh - 4rem);
+    }
 }
 
 @media (min-width: 1024px) {

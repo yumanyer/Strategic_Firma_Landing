@@ -1,8 +1,9 @@
-<aside class="floating-whatsapp">
+<aside class="floating-whatsapp" id="floating-wa">
   <a
     class="floating-whatsapp-link"
     href="https://wa.me/5491100000000?text=Hola,%20quiero%20consultar%20sobre%20los%20servicios%20de%20Firma%20Strategic..."
     id="floating-wa-btn"
+    aria-label="Asesoría Inmediata"
     rel="noopener noreferrer"
     target="_blank"
   >
@@ -21,20 +22,140 @@
 
 <style>
 .floating-whatsapp { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; display: flex; align-items: center; }
+
 .floating-whatsapp-link {
   display: flex; align-items: center; background-color: var(--color-primary); color: var(--color-on-primary);
   padding-left: 1rem; padding-right: 0.75rem; padding-top: 0.75rem; padding-bottom: 0.75rem;
-  box-shadow: var(--shadow-2xl); transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-2xl);
+  transition:
+    background-color 150ms cubic-bezier(0.4, 0, 0.2, 1),
+    padding 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .floating-whatsapp-link:hover { background-color: var(--color-inverse-surface); }
-.floating-whatsapp-copy { display: flex; flex-direction: column; text-align: left; margin-right: 0.75rem; }
+
+.floating-whatsapp-copy {
+  display: flex; flex-direction: column; text-align: left; margin-right: 0.75rem;
+  max-width: 10rem;          /* ≥ ancho real del texto */
+  overflow: hidden;
+  white-space: nowrap;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    max-width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 200ms ease,
+    visibility 0s linear 0s;
+}
 .floating-whatsapp-status {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; line-height: 14px; font-weight: 600; letter-spacing: 0.05em;
   color: var(--color-secondary-container); display: flex; align-items: center; gap: 0.375rem;
 }
 .floating-whatsapp-dot { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background-color: var(--color-secondary); display: inline-block; animation: floating-whatsapp-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 .floating-whatsapp-label { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 600; color: var(--color-on-primary); letter-spacing: -0.025em; }
-.floating-whatsapp-icon { width: 2.25rem; height: 2.25rem; border-radius: 9999px; background-color: var(--color-secondary); display: flex; align-items: center; justify-content: center; color: var(--color-on-secondary); }
-.floating-whatsapp-icon .material-symbols-outlined { font-size: 20px; }
+
+.floating-whatsapp-icon {
+  width: 2.25rem; height: 2.25rem; flex-shrink: 0; border-radius: 9999px;
+  background-color: var(--color-secondary);
+  display: flex; align-items: center; justify-content: center; color: var(--color-on-secondary);
+  box-shadow: 0 0 0 transparent;
+  transition:
+    width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.floating-whatsapp-icon .material-symbols-outlined { font-size: 20px; transition: font-size 300ms cubic-bezier(0.4, 0, 0.2, 1); }
 @keyframes floating-whatsapp-pulse { 50% { opacity: .5; } }
+
+/* ---------- Estado compacto (todas las pantallas): solo el círculo violeta ---------- */
+.floating-whatsapp.is-compact .floating-whatsapp-link {
+  padding: 0;
+  background-color: transparent;
+  box-shadow: none;
+}
+.floating-whatsapp.is-compact .floating-whatsapp-copy {
+  max-width: 0;
+  margin-right: 0;
+  opacity: 0;
+  visibility: hidden;
+  /* visibility se oculta recién cuando terminó el colapso */
+  transition:
+    max-width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 150ms ease,
+    visibility 0s linear 300ms;
+}
+.floating-whatsapp.is-compact .floating-whatsapp-icon {
+  width: 3rem;
+  height: 3rem;
+  box-shadow: var(--shadow-2xl);
+}
+.floating-whatsapp.is-compact .floating-whatsapp-icon .material-symbols-outlined { font-size: 24px; }
+
+/* ---------- Hover / foco: vuelve a expandirse (solo dispositivos con hover) ---------- */
+@media (hover: hover) {
+  .floating-whatsapp.is-compact:is(:hover, :focus-within) .floating-whatsapp-link {
+    padding: 0.75rem 0.75rem 0.75rem 1rem;
+    background-color: var(--color-inverse-surface);
+    box-shadow: var(--shadow-2xl);
+  }
+  .floating-whatsapp.is-compact:is(:hover, :focus-within) .floating-whatsapp-copy {
+    max-width: 10rem;
+    margin-right: 0.75rem;
+    opacity: 1;
+    visibility: visible;
+    transition:
+      max-width 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      margin-right 300ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 200ms ease,
+      visibility 0s linear 0s;
+  }
+  .floating-whatsapp.is-compact:is(:hover, :focus-within) .floating-whatsapp-icon {
+    width: 2.25rem;
+    height: 2.25rem;
+    box-shadow: 0 0 0 transparent;
+  }
+  .floating-whatsapp.is-compact:is(:hover, :focus-within) .floating-whatsapp-icon .material-symbols-outlined { font-size: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-whatsapp-link,
+  .floating-whatsapp-copy,
+  .floating-whatsapp-icon,
+  .floating-whatsapp-icon .material-symbols-outlined,
+  .floating-whatsapp.is-compact .floating-whatsapp-copy,
+  .floating-whatsapp.is-compact:is(:hover, :focus-within) .floating-whatsapp-copy {
+    transition: none;
+  }
+  .floating-whatsapp-dot { animation: none; }
+}
 </style>
+
+<script>
+  const wa = document.getElementById('floating-wa');
+  const THRESHOLD = 80;
+
+  if (wa) {
+    let compact = false;
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
+      const shouldCompact = window.scrollY > THRESHOLD;
+      if (shouldCompact !== compact) {
+        compact = shouldCompact;
+        wa.classList.toggle('is-compact', compact);
+      }
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update(); // estado correcto si la página carga ya scrolleada
+  }
+</script>
