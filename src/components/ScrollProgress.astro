@@ -1,0 +1,84 @@
+---
+---
+
+<div
+  aria-label="Progreso de desplazamiento"
+  aria-valuemax="100"
+  aria-valuemin="0"
+  aria-valuenow="0"
+  class="scroll-progress"
+  id="scroll-progress"
+  role="progressbar"
+>
+  <div class="scroll-progress-fill" id="scroll-progress-fill"></div>
+</div>
+
+<style>
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
+  width: 100%;
+  height: 3px;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: color-mix(in srgb, var(--color-secondary, #6e47b7) 14%, transparent);
+}
+
+.scroll-progress-fill {
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 120ms linear;
+  will-change: transform;
+  background-color: var(--color-secondary, #6e47b7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress-fill {
+    transition: none;
+  }
+}
+</style>
+
+<script>
+  const progress = document.getElementById("scroll-progress");
+  const fill = document.getElementById("scroll-progress-fill");
+
+  if (progress && fill) {
+    let frame = 0;
+    let lastPercent = -1;
+
+    const update = () => {
+      frame = 0;
+      const root = document.documentElement;
+      const scrollable = root.scrollHeight - root.clientHeight;
+      const ratio = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+
+      fill.style.transform = `scaleX(${ratio})`;
+
+      const percent = Math.round(ratio * 100);
+      if (percent !== lastPercent) {
+        lastPercent = percent;
+        progress.setAttribute("aria-valuenow", String(percent));
+      }
+    };
+
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("load", schedule);
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(schedule).observe(document.body);
+    }
+
+    update();
+  }
+</script>
