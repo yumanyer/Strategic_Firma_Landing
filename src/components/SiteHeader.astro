@@ -23,14 +23,14 @@
 </header>
 
 <script>
-  const header = document.querySelector(".site-header");
-  const toggle = document.querySelector(".site-menu-toggle");
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const toggle = document.querySelector<HTMLButtonElement>(".site-menu-toggle");
   const nav = document.getElementById("site-nav");
 
   if (header && toggle && nav) {
-    const icon = toggle.querySelector(".material-symbols-outlined");
+    const icon = toggle.querySelector<HTMLElement>(".material-symbols-outlined");
 
-    const setMenuOpen = (open) => {
+    const setMenuOpen = (open: boolean) => {
       header.dataset.menuOpen = String(open);
       toggle.setAttribute("aria-expanded", String(open));
       toggle.setAttribute("aria-label", open ? "Cerrar menú de navegación" : "Abrir menú de navegación");
@@ -38,18 +38,24 @@
     };
 
     toggle.addEventListener("click", () => setMenuOpen(header.dataset.menuOpen !== "true"));
+
     nav.addEventListener("click", (event) => {
-      if (event.target.closest("a")) setMenuOpen(false);
+      const target = event.target;
+      if (target instanceof Element && target.closest("a")) setMenuOpen(false);
     });
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && header.dataset.menuOpen === "true") {
         setMenuOpen(false);
         toggle.focus();
       }
     });
+
     document.addEventListener("click", (event) => {
-      if (header.dataset.menuOpen === "true" && !header.contains(event.target)) setMenuOpen(false);
+      const target = event.target as Node | null;
+      if (header.dataset.menuOpen === "true" && !header.contains(target)) setMenuOpen(false);
     });
+
     window.addEventListener("resize", () => {
       if (window.innerWidth >= 1024 && header.dataset.menuOpen === "true") setMenuOpen(false);
     }, { passive: true });

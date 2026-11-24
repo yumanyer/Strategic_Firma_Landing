@@ -41,6 +41,53 @@ function handleFormSubmit(event) {
     document.getElementById("strategic-contact-form")?.reset();
   }, 900);
 }
+(() => {
+  if (window.__tabTitleInit) return;
+  window.__tabTitleInit = true;
+
+  const AWAY_TITLES = [
+    '¡Te esperamos! | Firma Strategic',
+    '💼 Tu consulta sigue abierta',
+    '⏳ Volvé cuando quieras',
+  ];
+  const INTERVAL_MS = 2000;   // más rápido no sirve: los navegadores lo throttlean en segundo plano
+  const MAX_CYCLES = 15;      // se detiene solo tras ~30s para no ser molesto
+
+  let originalTitle = null;
+  let timer = null;
+
+  const stop = () => {
+    if (timer !== null) { clearInterval(timer); timer = null; }
+  };
+
+  const setAway = () => {
+    if (originalTitle !== null) return;
+    originalTitle = document.title; // fuente de verdad: lo que renderizó SiteLayout
+    let i = 0;
+    document.title = AWAY_TITLES[0];
+    timer = setInterval(() => {
+      i++;
+      if (i >= MAX_CYCLES) { stop(); document.title = AWAY_TITLES[0]; return; }
+      document.title = AWAY_TITLES[i % AWAY_TITLES.length];
+    }, INTERVAL_MS);
+  };
+
+  const restore = () => {
+    stop();
+    if (originalTitle === null) return;
+    document.title = originalTitle;
+    originalTitle = null;
+  };
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') setAway();
+    else restore();
+  });
+
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted && document.visibilityState === 'visible') restore();
+  });
+})();
 
 // The original markup uses inline handlers; expose the vanilla functions explicitly.
 window.prefillContact = prefillContact;
