@@ -1,3 +1,8 @@
+---
+// Reemplazá TU_FORM_ID por el ID de tu form en Formspree (https://formspree.io/f/xxxxxxxx)
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnpdlyby";
+---
+
 <section class="contact-section" id="contacto">
   <div class="contact-container">
     <div class="contact-header">
@@ -54,25 +59,32 @@
         <div class="contact-panel-footer">Sede Operativa: Buenos Aires · Miami · Londres</div>
       </div>
       <div class="contact-form-panel">
-        <form class="contact-form" id="strategic-contact-form" onsubmit="handleFormSubmit(event)">
+        <form
+          class="contact-form"
+          id="strategic-contact-form"
+          action={FORMSPREE_ENDPOINT}
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="Nueva consulta estratégica – Firma Strategic" />
+
           <div class="contact-form-grid">
             <div>
               <label class="contact-label" for="form-name">Nombre completo *</label>
-              <input class="contact-input" id="form-name" placeholder="Ej. Carlos Mendoza" required="" type="text" />
+              <input class="contact-input" id="form-name" name="nombre" placeholder="Ej. Carlos Mendoza" required type="text" />
             </div>
             <div>
               <label class="contact-label" for="form-email">Correo electrónico corporativo *</label>
-              <input class="contact-input" id="form-email" placeholder="carlos@empresa.com" required="" type="email" />
+              <input class="contact-input" id="form-email" name="email" placeholder="carlos@empresa.com" required type="email" />
             </div>
           </div>
           <div class="contact-form-grid">
             <div>
               <label class="contact-label" for="form-phone">Teléfono / WhatsApp *</label>
-              <input class="contact-input" id="form-phone" placeholder="+54 9 11 ..." required="" type="tel" />
+              <input class="contact-input" id="form-phone" name="telefono" placeholder="+54 9 11 ..." required type="tel" />
             </div>
             <div>
               <label class="contact-label" for="form-profile">Perfil del consultante *</label>
-              <select class="contact-select" id="form-profile" onchange="updateWhatsAppIntent()">
+              <select class="contact-select" id="form-profile" name="perfil">
                 <option value="Emprendedor / Profesional">Emprendedor / Profesional Independiente</option>
                 <option value="Comerciante / Dueño de negocio">Comerciante / Dueño de Negocio</option>
                 <option value="Empresario / Empresa">Empresario / Empresa Consolidada</option>
@@ -82,7 +94,7 @@
           </div>
           <div>
             <label class="contact-label" for="form-area">Área principal de interés *</label>
-            <select class="contact-select" id="form-area" onchange="updateWhatsAppIntent()">
+            <select class="contact-select" id="form-area" name="area">
               <option value="Finanzas">Soluciones Financieras (Divisas, USDT, Tesorería)</option>
               <option value="Comercio Exterior">Comercio Exterior (Importación, Logística, Aduana)</option>
               <option value="Internacionalización">Internacionalización (LLC, Apertura de Cuentas, Tax)</option>
@@ -91,21 +103,21 @@
           </div>
           <div>
             <label class="contact-label" for="form-detail">Breve detalle de tu necesidad u operación *</label>
-            <textarea class="contact-textarea" id="form-detail" placeholder="Describe los montos aproximados, países de origen/destino o tipo de sociedad requerida..." required="" rows="4"></textarea>
+            <textarea class="contact-textarea" id="form-detail" name="detalle" placeholder="Describe los montos aproximados, países de origen/destino o tipo de sociedad requerida..." required rows="4"></textarea>
           </div>
           <div class="contact-nda">
-            <input checked="" class="contact-checkbox" id="form-nda" required="" type="checkbox" />
+            <input checked class="contact-checkbox" id="form-nda" name="acepta_nda" value="Sí" required type="checkbox" />
             <label class="contact-nda-label" for="form-nda">
               Solicito evaluación amparada en acuerdo de estricta reserva y secreto fiduciario.
             </label>
           </div>
           <div class="contact-submit-wrap">
             <button class="contact-submit" id="form-submit-btn" type="submit">
-              <span>Solicitar evaluación estratégica</span>
+              <span id="form-submit-label">Solicitar evaluación estratégica</span>
               <span class="material-symbols-outlined">send</span>
             </button>
           </div>
-          <div class="contact-success hidden" id="form-success-banner">
+          <div class="contact-success hidden" id="form-success-banner" role="status">
             <div class="contact-success-header">
               <span class="material-symbols-outlined">check_circle</span>
               <span>Evaluación Registrada con Éxito</span>
@@ -114,11 +126,83 @@
               Hemos asignado tu requerimiento al equipo directivo. Te contactaremos en un plazo máximo de 24 horas hábiles vía WhatsApp o correo corporativo.
             </p>
           </div>
+          <div class="contact-success contact-error hidden" id="form-error-banner" role="alert">
+            <div class="contact-success-header">
+              <span class="material-symbols-outlined">error</span>
+              <span>No pudimos enviar tu consulta</span>
+            </div>
+            <p class="contact-success-text">
+              Intenta nuevamente en unos minutos o escríbenos directamente a contacto@firmastrategic.com o por WhatsApp.
+            </p>
+          </div>
+
+          <!-- Honeypot anti-spam: invisible para personas, los bots lo completan. Formspree descarta envíos con _gotcha lleno. -->
+          <div class="contact-hp" aria-hidden="true">
+            <label for="form-gotcha">No completar este campo</label>
+            <input id="form-gotcha" type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById("strategic-contact-form") as HTMLFormElement | null;
+  const btn = document.getElementById("form-submit-btn") as HTMLButtonElement | null;
+  const label = document.getElementById("form-submit-label");
+  const okBanner = document.getElementById("form-success-banner");
+  const errBanner = document.getElementById("form-error-banner");
+
+  // Mantiene el comportamiento previo de los selects (si updateWhatsAppIntent existe globalmente)
+  const syncWhatsApp = () => {
+    const fn = (window as any).updateWhatsAppIntent;
+    if (typeof fn === "function") fn();
+  };
+  document.getElementById("form-profile")?.addEventListener("change", syncWhatsApp);
+  document.getElementById("form-area")?.addEventListener("change", syncWhatsApp);
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!btn || !label) return;
+
+    okBanner?.classList.add("hidden");
+    errBanner?.classList.add("hidden");
+
+    // Honeypot: si está completo es un bot. Simulamos éxito sin enviar nada.
+    const honeypot = form.elements.namedItem("_gotcha") as HTMLInputElement | null;
+    if (honeypot && honeypot.value.trim() !== "") {
+      form.reset();
+      okBanner?.classList.remove("hidden");
+      return;
+    }
+
+    const originalLabel = label.textContent;
+    btn.disabled = true;
+    label.textContent = "Enviando...";
+
+    try {
+      const res = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" },
+      });
+
+      if (!res.ok) throw new Error(`Formspree respondió ${res.status}`);
+
+      form.reset();
+      okBanner?.classList.remove("hidden");
+      okBanner?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } catch (err) {
+      console.error(err);
+      errBanner?.classList.remove("hidden");
+      errBanner?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    } finally {
+      btn.disabled = false;
+      label.textContent = originalLabel;
+    }
+  });
+</script>
 
 <style>
 .contact-section { width: 100%; background-color: var(--color-surface-container-low); padding-top: clamp(2.5rem, 6vw, 3rem); padding-bottom: clamp(2.5rem, 6vw, 3rem); }
@@ -171,12 +255,20 @@
   transition: all 150ms cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: var(--shadow-md);
 }
 .contact-submit:hover { background-color: var(--color-inverse-surface); }
+.contact-submit:disabled { opacity: 0.7; cursor: not-allowed; }
 .contact-submit .material-symbols-outlined { font-size: 18px; }
 .contact-success { padding: var(--space-space-md); background-color: var(--color-secondary-fixed); color: var(--color-on-secondary-fixed); }
 .contact-success > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
 .contact-success-header { display: flex; align-items: center; gap: 0.5rem; font-family: var(--font-sans); font-size: 18px; line-height: 26px; font-weight: 600; letter-spacing: 0.01em; }
 .contact-success-header .material-symbols-outlined { color: var(--color-secondary); }
 .contact-success-text { font-family: var(--font-sans); font-size: 13px; line-height: 20px; font-weight: 400; }
+
+/* Estado de error */
+.contact-error { background-color: var(--color-error-container, #ffdad6); color: var(--color-on-error-container, #410002); }
+.contact-error .contact-success-header .material-symbols-outlined { color: var(--color-error, #b3261e); }
+
+/* Honeypot: fuera de pantalla (no display:none, para que los bots sigan viéndolo) */
+.contact-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
 
 @media (min-width: 640px) { .contact-form-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1024px) {
