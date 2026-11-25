@@ -20,7 +20,7 @@ function updateWhatsAppIntent() {
   const profile = document.getElementById("form-profile")?.value || "General";
   const area = document.getElementById("form-area")?.value || "Consulta";
   const encodedMsg = encodeURIComponent(`Hola Firma Strategic, soy perfil [${profile}] y deseo asesoramiento en el área de [${area}].`);
-  const dynamicWaUrl = `https://wa.me/5491100000000?text=${encodedMsg}`;
+  const dynamicWaUrl = `https://wa.me/1135542588?text=${encodedMsg}`;
   const sideWaLink = document.getElementById("dynamic-wa-link");
   const floatWaBtn = document.getElementById("floating-wa-btn");
   if (sideWaLink) sideWaLink.href = dynamicWaUrl;
